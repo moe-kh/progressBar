@@ -1,0 +1,33 @@
+.content {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+
+  padding: 45px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.box {
+  position: relative;
+}
+.bottom_right {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 8px;
+}
+.bottom_left {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  font-size: 8px;
+}
+
+.top_bold {
+  position: absolute;
+  bottom: 0px;
+
+  font-size: 18px;
+  font-weight: bold;
+}
