@@ -2,6 +2,7 @@ import "./App.css";
 import NavBar from "./NavBar";
 import Card from "./Card";
 import Session from "./Session";
+import Dashboard from "./DashBoard";
 //import { ProgressBar, Step } from "react-step-progress-bar";
 import {
   BrowserRouter as Router,
@@ -21,24 +22,10 @@ function App() {
   return (
     <Router>
       <div className="grid-container">
-        <header>
-          <NavBar />
-        </header>
-        <div>
-          <ui>
-            <li className="ProgBar">Step1</li>
-            <li className="ProgBar">Step2</li>
-            <li className="ProgBar">Step3</li>
-          </ui>
-        </div>
-
-        <div>
-          {info.map((member) => (
-            <Card date={member.date} name={member.name} title={member.title} />
-          ))}
-        </div>
+        <NavBar />
+        <Route path="/session" exact component={Session} />
+        <Route path="/dashboard" exact component={Dashboard} />
       </div>
-      <Route path="/session" component={Session} />
     </Router>
   );
 }

@@ -35,7 +35,7 @@ a:link {
 .grid-container {
   display: grid;
   grid-column-gap: 0px;
-  grid-template-columns: 200px 800px auto;
+  grid-template-columns: 200px auto;
   background-color: white;
   padding-bottom: 50px;
 }
@@ -76,8 +76,6 @@ a:link {
   background-color: rgba(211, 211, 211, 0.8);
   border-radius: 50%;
   float: left;
-  margin-right: 10%;
-  margin-left: 10%;
   margin-top: 10%;
 }
 

@@ -21,7 +21,13 @@ const card = (props) => (
         {" "}
         <p className="top_bold "> {props.title}</p>
       </div>
+      <br />
+
+      <button onClick={props.clicked}>Delete</button>
+
+      <button onClick={props.edit}>Edit</button>
     </main>
+    <div></div>
     <br />
   </React.Fragment>
 );

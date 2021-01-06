@@ -1,0 +1,19 @@
+.dashboard-grid-container {
+  display: grid;
+  grid-column-gap: 0px;
+  grid-template-columns: auto 200px;
+  background-color: white;
+  padding-bottom: 50px;
+}
+.Bar {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 150px;
+  height: 10px;
+  background-color: rgba(211, 211, 211, 0.8);
+  float: left;
+  margin-top: 15.5%;
+}
