@@ -23,30 +23,37 @@ import { render } from "@testing-library/react";
 // };
 
 function Dashboard() {
-  //   let [enteredTitle, setEnteredTitle] = useState("");
-  //   let [enteredDate, setEnteredDate] = useState("");
+  let [enteredTitle, setEnteredTitle] = useState("");
+  let [enteredDate, setEnteredDate] = useState("");
   let [enteredName, setEnteredName] = useState("");
+  let [cardIndex, setCardIndex] = useState(0);
   const [open, setOpen] = useState(false);
-
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
 
-  const handlSubmit = (event) => {
-    event.preventDefault();
+  const handlSubmit = (index) => (e) => {
+    e.preventDefault();
     onCloseModal(true);
-    info.enteredName = event.target.value;
-    let newInfo = [...info];
-    newInfo.enteredName = enteredName;
+    info[index].enteredName = enteredName;
+    info[index].enteredDate = enteredDate;
+    info[index].enteredTitle = enteredTitle;
 
-    setEnteredInfo(newInfo);
+    setEnteredInfo(info);
     console.log(newInfo.enteredName);
-    console.log(enteredName);
+    console.log(info);
 
-    // setEnteredInfo(enteredName);
+    console.log(enteredName);
   };
-  function handlChange(event) {
+  function handlChangeName(event) {
     setEnteredName(event.target.value);
   }
+  function handlChangeDate(event) {
+    setEnteredDate(event.target.value);
+  }
+  function handlChangeTitle(event) {
+    setEnteredTitle(event.target.value);
+  }
+  let [newInfo, setEnteredNewInfo] = useState([]);
   let [info, setEnteredInfo] = useState([
     {
       enteredDate: "2020-12-27",
@@ -79,10 +86,32 @@ function Dashboard() {
       </div>
 
       <div>
-        <Modal open={open} center>
-          <form onSubmit={handlSubmit}>
+        <Modal style={{ backgroundColor: "red" }} open={open} center>
+          <form onSubmit={handlSubmit(cardIndex)}>
             Name :
-            <input type="text" value={enteredName} onChange={handlChange} />
+            <input
+              style={{ margin: "10px 10px 10px 10px" }}
+              type="text"
+              value={enteredName}
+              onChange={handlChangeName}
+            />
+            <br />
+            Date :
+            <input
+              style={{ margin: "10px 10px 10px 10px" }}
+              type="text"
+              value={enteredDate}
+              onChange={handlChangeDate}
+            />
+            <br />
+            Title :
+            <input
+              style={{ margin: "10px 10px 10px 10px" }}
+              type="text"
+              value={enteredTitle}
+              onChange={handlChangeTitle}
+            />
+            <br />
             <button type="submit">Save</button>
           </form>
         </Modal>
@@ -107,6 +136,7 @@ function Dashboard() {
               //   setEnteredInfo(info);
             }}
             edit={() => {
+              setCardIndex(index);
               setOpen(true);
             }}
           />
