@@ -34,15 +34,18 @@ function Dashboard() {
   const handlSubmit = (index) => (e) => {
     e.preventDefault();
     onCloseModal(true);
-    info[index].enteredName = enteredName;
-    info[index].enteredDate = enteredDate;
-    info[index].enteredTitle = enteredTitle;
+    if (enteredName != "" && enteredTitle != "" && setEnteredDate != "") {
+      info[index].enteredName = enteredName;
+      info[index].enteredDate = enteredDate;
+      info[index].enteredTitle = enteredTitle;
 
-    setEnteredInfo(info);
-    console.log(newInfo.enteredName);
-    console.log(info);
+      setEnteredInfo(info);
+    } else {
+      console.log(newInfo.enteredName);
+      console.log(info);
 
-    console.log(enteredName);
+      console.log(enteredName);
+    }
   };
   function handlChangeName(event) {
     setEnteredName(event.target.value);
