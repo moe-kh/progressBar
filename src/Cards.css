@@ -34,7 +34,7 @@ button {
 .top_bold {
   position: absolute;
   bottom: 0px;
-
+  text-align: center;
   font-size: 18px;
   font-weight: bold;
 }

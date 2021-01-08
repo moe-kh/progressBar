@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import Card from "./Card";
 import Session from "./Session";
 import "./Dashboard.css";
+import Profile from "./me.jpg";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 //import { ProgressBar, Step } from "react-step-progress-bar";
@@ -86,10 +87,43 @@ function Dashboard() {
           <li className="Bar"></li>
           <li className="ProgBar">Step3</li>
         </ul>
-      </div>
+        <br />
+        <br />
+        <div className="dashboard-grid-profiles">
+          <div class="card">
+            <img className="property-image" src={Profile} alt="Profile" />
+            <h1>Mohamad Khaled</h1>
+            <p class="title">CEO & Founder, Example</p>
+            <p>SAIT</p>
+          </div>
 
+          <div class="card">
+            <img className="property-image" src={Profile} alt="Profile" />
+            <h1>John Doe</h1>
+            <p class="title">CEO & Founder, Example</p>
+            <p>SAIT</p>
+          </div>
+          <div class="card">
+            <img className="property-image" src={Profile} alt="Profile" />
+            <h1>John Doe</h1>
+            <p class="title">CEO & Founder, Example</p>
+            <p>SAIT</p>
+          </div>
+          <div class="card">
+            <img className="property-image" src={Profile} alt="Profile" />
+            <h1>Omar Dalli</h1>
+            <p class="title">CEO & Founder, Example</p>
+            <p>SAIT</p>
+          </div>
+        </div>
+      </div>
       <div>
-        <Modal style={{ backgroundColor: "red" }} open={open} center>
+        <Modal
+          style={{ backgroundColor: "red" }}
+          open={open}
+          onClose={onCloseModal}
+          center
+        >
           <form onSubmit={handlSubmit(cardIndex)}>
             Name :
             <input
