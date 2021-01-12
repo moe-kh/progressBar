@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import NavBar from "./NavBar";
 import Card from "./Card";
-import Session from "./Session";
 import "./Dashboard.css";
 import Profile from "./me.jpg";
 import { Modal } from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import Styled from "styled-components";
+
 //import { ProgressBar, Step } from "react-step-progress-bar";
 import {
   BrowserRouter as Router,
@@ -27,25 +27,74 @@ function Dashboard() {
   let [enteredTitle, setEnteredTitle] = useState("");
   let [enteredDate, setEnteredDate] = useState("");
   let [enteredName, setEnteredName] = useState("");
-  let [cardIndex, setCardIndex] = useState(0);
+  let [cardIndex, setCardIndex] = useState(-1);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
+  const CardStyle = Styled.div`
+  height: 200px;
+  margin-left: 20px;
+  max-width: 300px;
+
+  flex-direction: column;
+  position: relative;
+
+  border-radius: 19px 0px 0px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-image: url("https://cdn.photographylife.com/wp-content/uploads/2017/01/What-is-landscape-photography.jpg");
+  background-size: 100% 65px;
+  background-repeat: no-repeat;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  
+  `;
+
+  const Title = Styled.p`
+  color: rgb(12, 10, 10);
+  font-size: 10px;
+  margin-top: 0px;`;
+  var today = new Date(),
+    date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+
+  const addSession = () => {
+    setCardIndex(-1);
+    setOpen(true);
+  };
 
   const handlSubmit = (index) => (e) => {
     e.preventDefault();
     onCloseModal(true);
-    if (enteredName != "" && enteredTitle != "" && setEnteredDate != "") {
+    if (
+      enteredName != "" &&
+      enteredTitle != "" &&
+      setEnteredDate != "" &&
+      index != -1
+    ) {
       info[index].enteredName = enteredName;
       info[index].enteredDate = enteredDate;
       info[index].enteredTitle = enteredTitle;
 
       setEnteredInfo(info);
     } else {
-      console.log(newInfo.enteredName);
       console.log(info);
 
       console.log(enteredName);
+
+      let newInfo = {
+        enteredDate: enteredDate,
+        enteredName: enteredName,
+        enteredTitle: enteredTitle,
+      };
+      info.push(newInfo);
+      setEnteredInfo(info);
     }
   };
   function handlChangeName(event) {
@@ -57,10 +106,10 @@ function Dashboard() {
   function handlChangeTitle(event) {
     setEnteredTitle(event.target.value);
   }
-  let [newInfo, setEnteredNewInfo] = useState([]);
+
   let [info, setEnteredInfo] = useState([
     {
-      enteredDate: "2020-12-27",
+      enteredDate: "2020-12-21",
       enteredName: "Cody",
       enteredTitle: "MyTitle",
     },
@@ -79,7 +128,10 @@ function Dashboard() {
 
   return (
     <div className="dashboard-grid-container">
-      <div style={{ marginLeft: "auto", marginRight: "auto" }}>
+      <div style={{ marginLeft: "60px", marginRight: "auto" }}>
+        <button className="buttonAddSession" onClick={addSession}>
+          Add Session
+        </button>
         <ul>
           <li className="ProgBar">Step1</li>
           <li className="Bar"></li>
@@ -87,34 +139,34 @@ function Dashboard() {
           <li className="Bar"></li>
           <li className="ProgBar">Step3</li>
         </ul>
-        <br />
+
         <br />
         <div className="dashboard-grid-profiles">
-          <div class="card">
+          <CardStyle>
             <img className="property-image" src={Profile} alt="Profile" />
             <h1>Mohamad Khaled</h1>
-            <p class="title">CEO & Founder, Example</p>
+            <Title>CEO & Founder, Example</Title>
             <p>SAIT</p>
-          </div>
+          </CardStyle>
 
-          <div class="card">
+          <CardStyle>
             <img className="property-image" src={Profile} alt="Profile" />
             <h1>John Doe</h1>
-            <p class="title">CEO & Founder, Example</p>
+            <Title>CEO & Founder, Example</Title>
             <p>SAIT</p>
-          </div>
-          <div class="card">
+          </CardStyle>
+          <CardStyle>
             <img className="property-image" src={Profile} alt="Profile" />
             <h1>John Doe</h1>
-            <p class="title">CEO & Founder, Example</p>
+            <Title>CEO & Founder, Example</Title>
             <p>SAIT</p>
-          </div>
-          <div class="card">
+          </CardStyle>
+          <CardStyle>
             <img className="property-image" src={Profile} alt="Profile" />
             <h1>Omar Dalli</h1>
-            <p class="title">CEO & Founder, Example</p>
+            <Title>CEO & Founder, Example</Title>
             <p>SAIT</p>
-          </div>
+          </CardStyle>
         </div>
       </div>
       <div>
@@ -136,7 +188,7 @@ function Dashboard() {
             Date :
             <input
               style={{ margin: "10px 10px 10px 10px" }}
-              type="text"
+              type="date"
               value={enteredDate}
               onChange={handlChangeDate}
             />
