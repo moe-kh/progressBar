@@ -1,6 +1,6 @@
 import React from "react";
-import classes from "./NavBar.css";
-import Logo from "./software.jpg";
+import "./NavBar.css";
+import Logo from "../../src/software.jpg";
 //import Session from "./Session";
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
@@ -39,14 +39,6 @@ const navBar = (props) => {
           </Link>
         </Switch>
       </div>
-
-      {/* <ul >
-                <li  className="NavList">Dashboard</li>
-                
-                <li  className="NavList">Sessions</li>
-                <li  className="NavList">Files</li>
-                <li  style={{paddingTop:"50px",color: "white" , paddingBottom:"70px"}}>Messages</li>
-            </ul> */}
     </div>
   );
 };

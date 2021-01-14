@@ -55,9 +55,34 @@ a {
 
 .buttonAddSession {
   height: 30px;
-  background-color: darkgreen;
+  width: 90px;
+  font-size: 12px;
+  background-color: seagreen;
   color: white;
-  margin-left: 700px;
-  margin-top: 30px;
   text-align: right;
+}
+
+.Modal {
+  background-color: rgb(166, 218, 212);
+  padding: 30px 30px 30px 30px;
+  border: none;
+}
+.In {
+  padding-left: 40px;
+}
+.In:hover {
+  background-color: rgb(253, 246, 246);
+}
+.Label {
+  padding-right: 40px;
+}
+.buttonSaveModal {
+  height: 30px;
+  width: 60px;
+  background-color: seagreen;
+  color: white;
+
+  margin-top: 30px;
+  text-align: center;
+  margin-left: 230px;
 }

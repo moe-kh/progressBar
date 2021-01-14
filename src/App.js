@@ -1,8 +1,9 @@
 import "./App.css";
-import NavBar from "./NavBar";
-import Card from "./Card";
-import Session from "./Session";
-import Dashboard from "./DashBoard";
+import NavBar from "./components/NavBar";
+import Card from "./components/Card";
+import Session from "./Pages/Session";
+import Dashboard from "./Pages/DashBoard";
+
 //import { ProgressBar, Step } from "react-step-progress-bar";
 import {
   BrowserRouter as Router,
@@ -12,11 +13,11 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 
-const info = [
-  { date: "2020-12-27", name: "Moe", title: "MyTitle" },
-  { date: "2020-12-28", name: "Abdull", title: "MyTitle" },
-  { date: "2020-12-29", name: "Sheng", title: "MyTitle" },
-];
+// const info = [
+//   { date: "2020-12-27", name: "Moe", title: "MyTitle" },
+//   { date: "2020-12-28", name: "Abdull", title: "MyTitle" },
+//   { date: "2020-12-29", name: "Sheng", title: "MyTitle" },
+// ];
 
 function App() {
   return (
