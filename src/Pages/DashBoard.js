@@ -30,13 +30,13 @@ function Dashboard() {
   let [enteredTitle, setEnteredTitle] = useState("");
   let [enteredDate, setEnteredDate] = useState("");
   let [enteredName, setEnteredName] = useState("");
+  let [cost, setEnteredCost] = useState(0);
+
   let [cardIndex, setCardIndex] = useState(-1);
   const [open, setOpen] = useState(false);
   const onOpenModal = () => setOpen(true);
   const onCloseModal = () => setOpen(false);
-  let theme = {
-    main: "",
-  };
+
   const CardStyle = Styled.div`
   
   height: 200px;
@@ -76,10 +76,22 @@ function Dashboard() {
     width: 70px;
     height: 70px;
     font-size: 12px;
-    background-color: rgba(211, 211, 211, 0.8);
+    background-color:${(props) => props.theme.main};
     border-radius: 50%;
     float: left;
     margin-top: 11%;
+  `;
+  const BarLi = Styled.li`
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 150px;
+    height: 10px;
+    background-color: ${(props) => props.theme.main};
+    float: left;
+    margin-top: 16.5%;
   `;
 
   var today = new Date(),
@@ -99,6 +111,7 @@ function Dashboard() {
     setCardIndex(-1);
     setOpen(true);
   };
+  let [theme, setTheme] = useState({ main: " rgba(211, 211, 211, 0.8);" });
   let [search, setSearch] = useState("");
   const handlSubmit = (index) => (e) => {
     e.preventDefault();
@@ -106,27 +119,27 @@ function Dashboard() {
     if (
       enteredName != "" &&
       enteredTitle != "" &&
-      setEnteredDate != "" &&
+      enteredDate != "" &&
       index != -1
     ) {
       info[index].enteredName = enteredName;
       info[index].enteredDate = enteredDate;
       info[index].enteredTitle = enteredTitle;
-
+      info[index].cost = cost * 1;
       setEnteredInfo(info);
     } else {
       let newInfo = {
         enteredDate: enteredDate,
         enteredName: enteredName,
         enteredTitle: enteredTitle,
+        cost: cost * 1,
       };
+
       info.push(newInfo);
       setEnteredInfo(info);
-      theme = {
-        main: "red",
-      };
     }
   };
+
   function handlChangeName(event) {
     setEnteredName(event.target.value);
   }
@@ -145,33 +158,38 @@ function Dashboard() {
     {
       enteredDate: "2020-12-21",
       enteredName: "Cody",
-      enteredTitle: "MyTitle",
+      enteredTitle: "First Title",
+      cost: 10,
     },
     {
       enteredDate: "2020-12-28",
       enteredName: "Abdull",
-      enteredTitle: "MyTitle",
+      enteredTitle: "Second Title",
+      cost: 20,
     },
     {
       enteredDate: "2020-12-29",
       enteredName: "Sheng",
-      enteredTitle: "MyTitle",
+      enteredTitle: "Third Title",
+      cost: 60,
     },
   ]);
+
+  const total = info.reduce(
+    (previousScore, currentScore, index) => previousScore + currentScore.cost,
+    0
+  );
   let [counter, setCounter] = useState(0);
   return (
     <div className="dashboard-grid-container">
       <div style={{ marginLeft: "auto", marginRight: "auto" }}>
         <p>Today's date: {date}</p>
         <ul>
-          <ThemeProvider theme={theme}>
-            <ProgressBarLi>Step1</ProgressBarLi>
-          </ThemeProvider>
-          <li className="Bar"></li>
-
-          <ProgressBarLi>Step2</ProgressBarLi>
-          <li className="Bar"></li>
-          <ProgressBarLi>Step3</ProgressBarLi>
+          <ProgressBarLi theme={theme}>Step1</ProgressBarLi>
+          <BarLi theme={theme}></BarLi>
+          <ProgressBarLi theme={theme}>Step2</ProgressBarLi>
+          <BarLi theme={theme}></BarLi>
+          <ProgressBarLi theme={theme}>Step3</ProgressBarLi>
         </ul>
 
         <br />
@@ -237,6 +255,18 @@ function Dashboard() {
                 onChange={handlChangeTitle}
               />
               <br />
+              <label className="Label"> Cost :</label>
+              <input
+                id="myInput"
+                className="In"
+                style={{ margin: "10px 10px 10px 10px" }}
+                type="number"
+                value={cost}
+                onChange={(event) => {
+                  setEnteredCost(event.target.value);
+                }}
+              />
+              <br />
               <button className="buttonSaveModal" type="submit">
                 Save
               </button>
@@ -247,6 +277,7 @@ function Dashboard() {
         <button className="buttonAddSession" onClick={addSession}>
           Add Session
         </button>
+
         <SearchBar handleInput={handleInput} />
 
         {info
@@ -261,6 +292,7 @@ function Dashboard() {
               date={member.enteredDate}
               name={member.enteredName}
               title={member.enteredTitle}
+              cost={member.cost}
               key={index}
               clicked={() => {
                 //   alert("here");
@@ -276,11 +308,14 @@ function Dashboard() {
                 //   setEnteredInfo(info);
               }}
               edit={() => {
+                setTheme({ main: "green" });
+                console.log(theme);
                 setCardIndex(index);
                 setOpen(true);
               }}
             />
           ))}
+        <p> Total: {total}$ </p>
       </div>
     </div>
   );

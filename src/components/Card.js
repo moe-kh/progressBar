@@ -4,23 +4,15 @@ import classes from "./Cards.css";
 const card = (props) => (
   <React.Fragment>
     <main className="content">
-      <div className="box">
-        {" "}
-        <p className="bottom_right">
-          {props.date} <br />
-        </p>
-      </div>
-      <div className="box">
-        <p className="bottom_left">
-          {" "}
-          {props.name}
-          <br />
-        </p>
-      </div>
-      <div className="box">
-        {" "}
-        <p className="top_bold "> {props.title}</p>
-      </div>
+      <h1> {props.title}</h1>
+      <p>
+        {props.name} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {props.date} <br />
+      </p>
+
+      <p>Cost: {props.cost}$</p>
+
       <br />
 
       <button onClick={props.clicked}>Delete</button>
